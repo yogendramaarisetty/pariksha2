@@ -1,0 +1,42 @@
+{% extends "base.html" %} 
+{% block content %} 
+
+{% load static %}
+
+
+<br><br>
+{% if not  user.is_authenticated %}
+<style>
+body{
+    background-color: #ebf4f8;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23101abd' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23210e95' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%233217b3' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23270f95' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%234015bb' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%232f0e88' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%235a0fa1' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%233b0e7d' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23600b9b' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23380f7e' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%236a0595' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%2349107d' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+background-attachment: fixed;
+background-size: cover;
+}
+</style>
+<h3 class="text-primary"    >Welcome to planful</h3>
+<h1 class="text-secondary large-text font-weight-bolder">Get Hired in <span class="text-primary grad">3 simple steps</span></h1>
+<br>
+<a class="cursor-pointer" href="{% url 'google_login' %}?next=/"><div class="shadow-sm p-3 col-4 mb-5 bg-white rounded"><img src="{% static 'img/google.svg' %}" alt="google" width=35 class="rounded-sm ml-10"><span class="span-highlight text-dark font-weight-bold">Sign In</span></div></a>
+<div class="shadow-sm p-3 col-4 mb-5 bg-white rounded"><img src="{% static 'img/register.svg' %}" width=35 alt="register" class="rounded-sm ml-10"><span class="span-highlight text-dark font-weight-bold">Fill Details</span></div>
+<div class="shadow-sm p-3 col-4 mb-5 bg-white rounded"><img src="{% static 'img/test.svg' %}" width=35 alt="test" class="rounded-sm ml-10"><span  class="span-highlight text-dark font-weight-bold">Take the test</span></div>
+
+
+{% else %}
+<form class="form-signin" id="pin_form" method="post">
+{% csrf_token %}
+  <div class="text-center mb-4">
+     <h3 class="h4 text-dark mb-3 font-weight-normal">Enter the 8 digit PIN</h3>
+  </div>
+
+  <div class="form-label-group input-group-sm">
+    <input type="text" name="pin" maxlength="8" id="inputPin" class="form-control" placeholder="Challenge PIN" required=true>
+    <label for="inputPin"></label>
+  </div>
+  <input type="submit" value="Access" class="default btn btn-lg btn-primary btn-block btn-sm" name="_save">
+  {% comment %} <button class="btn btn-lg btn-primary btn-block btn-sm" type="submit">Proceed</button> {% endcomment %}
+  <p class="mt-4 mb-3 text-muted text-center">© 2019-2020</p>
+</form>
+
+{% endif %}
+{% endblock %}

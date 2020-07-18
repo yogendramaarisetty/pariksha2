@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{challenge.title}} - pariksha</title>
+    <link rel="stylesheet" href="{% static 'testpage-light.css'%}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+        integrity="sha256-yNbKY1y6h2rbVcQtf0b8lq4a+xpktyFc3pSYoGAY1qQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.3/ResizeSensor.js"
+        integrity="sha256-scM4I3Wq4bmRJZ9ILYWdzF4CiUH05SpzUwcB0rmxaGI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-element-queries/1.2.3/ElementQueries.min.js"
+        integrity="sha256-4ym8ALdjFVdHbp7s//xqyfnxlrArmCeGh5R4pioLOkk=" crossorigin="anonymous"></script>
+</head>
+</head>
+<script>
+ 
+  
+
+</script>
+<body>
+    <div class="float-left qnav dtheme-c3" width="70px">
+        <div id="timer" class="dtheme-c1 d-flex p-2">
+            <span class="center text-light">40m Left</span>
+        </div>
+        <div id="qtab" class="dtheme-c3">
+        
+            <div id="all_q" class="d-flex p-2 text-center">
+                <span class="center">All</span></div>
+        </div>
+        <hr class="hr">
+        <div id="q_list" class="">
+            <ul class="question-tab__list question-tab__list--scrollable">
+                {% for q in questions%}
+                <li><a id="{{q.question.id}}" class="q_btn d-block question-tab__list-item question-tab__list-item"
+                        aria-label="Modify submission of question 1"
+                        href="#">{{ forloop.counter }}</a></li>
+               {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="main-c float-left">
+        <div id="left_pane" class="split dtheme-c2">
+            <div id="q_hider" class="d-none">
+                {% for q in questions%}
+                <div class="container text-lightd " id="desc_{{q.question.id}}">
+
+                    <h5 class="question-view__title">{{forloop.counter}}. {{q.question.title}}</h5>
+                
+                    <div class="small-text">{{q.question.description | safe}}</div>
+                    </div>
+                
+                {% endfor %}
+            </div>
+            <div id="question_view" class="pt-1 pb-2 pl-3 pr-3 text-light">
+
+            </div>
+        </div>
+        <div id="right_pane" class="split">
+            <div id="top_pane" class="">
+                <div class="utility-bar dtheme-c1">
+                    <select id="language" class="js-example-basic-single mr-auto" name="state">
+                       {% for l in languages %}
+                        <option id="{{l.id}}" value="{{l.value}}">{{l.name}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div id="editor" class="editor-container">
+
+
+                </div>
+            </div>
+            <div id="bottom_pane" class="dtheme-c2">
+                <div id="control_panel" class="dtheme-c1 d-flex flex-row">
+                    
+                    <div class="d-flex align-items-stretch flex-row bd-highlight">
+                        <div class="p-2 pr-3 pl-3 font-weight-bold cursor-pointer bd-highlight text-c2 hov-c3">Flex item 1</div>
+                        <div class="p-2 pr-3 pl-3 font-weight-bold cursor-pointer bd-highlight text-c2 hov-c3">Flex item 2</div>
+                        <button id="run" class="btn btn-dark  dtheme-c3 ml-auto mr-2 rounded-0 p-2 pr-3 pl-3 bd-highlight" type="button">
+                            Run
+                          </button>
+                          <button id="submit" class="btn btn-success rounded-0 mr-2 p-2 pr-3 pl-3 bd-highlight" type="button">
+                            Submit
+                          </button>
+                    </div>
+                      
+                    <!-- <div id="ctrl_btns" class="d-flex flex-row w-auto float-right ml-auto">
+                    <button id="run" class="btn btn-success" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Running...
+                    </button>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Running...
+                    <button id="submit" class="btn btn-dark submit p-2 pr-4 pl-4 rounded-0 mr-3">Submit</button>
+                </div> -->
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/split.js/dist/split.min.js "></script>
+    <script>
+        $(document).ready(function () {
+            Split(['#left_pane', '#right_pane'], {
+                gutterSize: 12,
+                sizes: [36, 64],
+                minSize: [0, 470]
+            });
+            setInterval(1000);
+            Split(['#top_pane', '#bottom_pane'], {
+                gutterSize: 10,
+                sizes: [90, 10],
+                direction: 'vertical',
+                minSize: 40,
+
+            });
+            $(document).ready(function () {
+                $('.js-example-basic-multiple').select2();
+            });
+            $(document).ready(function () {
+                $('.js-example-basic-single').select2();
+            });
+        });
+        $(document).ready(function(){
+    var gutter_el =  `<div class="pane-splitter__drag-icon" style="top: calc(50% + -18px);"><svg viewBox="0 0 6 30" width=".75em" height="2em" class=" ui-svg-icon" fill="currentColor"><path d="M0 0h2v2H0zm4 0h2v2H4zM0 4h2v2H0zm4 0h2v2H4zM0 8h2v2H0zm4 0h2v2H4zm-4 4h2v2H0zm4 0h2v2H4zm-4 4h2v2H0zm4 0h2v2H4zm-4 4h2v2H0zm4 0h2v2H4zm-4 4h2v2H0zm4 0h2v2H4zm-4 4h2v2H0zm4 0h2v2H4z"></path></svg></div>`
+    $gutter = $('.gutter-horizontal');
+    $gutter.html(gutter_el);
+   })
+        const csrf_token = "{{ csrf_token }}";
+    </script>
+    <script src="{% static 'node_modules/monaco-editor/min/vs/loader.js'%}"></script>
+    <script>
+        var vspath = "{% static 'node_modules/monaco-editor/min/vs' %}";
+    require.config({ paths: { 'vs': "{% static 'node_modules/monaco-editor/min/vs' %}" } });
+    
+    
+    </script>
+   <script src="{% static 'vscode_editor.js'%}"></script>
+   <script>
+      
+
+   </script>
+   <script src="{% static 'runsubmit.js'%}"></script>
+</body>
+
+
+</html>

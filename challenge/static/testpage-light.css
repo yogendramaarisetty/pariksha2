@@ -1,0 +1,304 @@
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+ ::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-color: #111827;
+    border-style: solid;
+    border-width: 0 3px;
+    background-color: #585d68;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #111827;
+}
+
+.split {
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    max-height:100vh;
+    margin: 0px;
+    background-color: #1d2432 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+
+}
+.gutter{
+    transition: .2s;
+}
+.qnav {
+    height: 100%;
+    width: 70px;
+    box-sizing: border-box;
+}
+.split, .gutter.gutter-horizontal {
+    float: left;
+    box-sizing: border-box;
+}
+.gutter.gutter-horizontal {
+    cursor: ew-resize;
+}
+
+.main-c {
+    width: calc(100% - 70px);
+    max-width: calc(100% - 70px);
+    height: 100vh;
+    float: left;
+}
+.gutter {
+    height: 100vh;
+    box-sizing: border-box;
+    background-color: #2e3441 !important;
+}
+.gutter.gutter-vertical {
+    width: 100%;
+    cursor: ns-resize;
+}
+.dtheme-c1{
+    background-color: #2e3441 !important;
+}
+.utility-bar{
+    height: 50px;
+    width: 100%;
+}
+.dtheme-c2{
+    background-color: #1d2432 !important;
+}
+.dtheme-c3{
+    background-color: #111827 !important;
+}
+div#editor {
+    height: calc(100% - 50px);
+
+}
+.gutter-horizontal:hover {
+    background-color: #1d2432 !important;
+    border-right: .5px solid #2e3441;
+    border-left: .5px solid #2e3441;
+}
+.gutter-vertical:hover {
+    background-color: #1d2432 !important;
+    border-top: .5px solid #2e3441;
+    border-bottom: .5px solid #2e3441;
+}
+span.select2.select2-container.select2-container--default {background: #2e3441 !important;}
+
+.utility-bar.dtheme-c1 {
+    padding: 10px 10px;
+}
+
+span.select2-selection.select2-selection--single {
+    background: #111827;
+    border: 1px solid #111827;
+    border-radius: 1px;
+}
+span.select2-dropdown.select2-dropdown--below {
+    background: #111827;
+    color: #a7a7a7;
+    border: 0px;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background: #0b0f19;
+}
+.select2 {
+    background: #0d131f !important;
+}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background: #0b0f19;
+}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #101727 !important;
+    color: #e6e6e6 !important;
+}
+.select2-container--default .select2-results__option--selected {
+    background-color: #111827 !important;
+}
+.select2-search__field {
+    background: #111827;
+    color: aliceblue
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #c5c5c5 !important;
+    line-height: 28px ;
+    font-weight: 500 !important;
+}
+#timer {
+    height: 60px;
+    font-weight: 500;
+}
+.question-tab__list--scrollable {
+    overflow: auto;
+    flex-grow: 1;
+}
+.question-tab__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    font-size: 14px;
+}
+.theme-m .question-tab__list-item--answered {
+    font-weight: 400;
+}
+.theme-m .question-tab__list-item {
+    font-weight: 700;
+}
+.question-tab__list-item:hover {
+    color: #097bbf;
+    color: var(--color-question-tab-item-hover-text,#097bbf);
+}
+.theme-m .d-block {
+    display: block!important;
+}
+.theme-dark [aria-label] {
+    --balloon-color: #eef4fc;
+}
+:root [aria-label] {
+    --balloon-color: rgba(14,20,30,0.95);
+}
+.theme-m .d-block {
+    display: block!important;
+}
+.theme-m a, .theme-m label, .theme-m p {
+    font-weight: 400;
+    font-family: Arial,Helvetica,sans-serif;
+    font-family: var(--font-family-text);
+}
+.theme-m a, .theme-m label, .theme-m p {
+    font-weight: 400;
+    font-family: Arial,Helvetica,sans-serif;
+    font-family: var(--font-family-text);
+}
+.question-tab__list-item--answered {
+    color: #576871;
+    color: var(--color-question-tab-item-solved-text,#576871);
+}
+.question-tab__list-item {
+    color: #0e141e;
+    color: var(--color-question-tab-item-text,#0e141e);
+    padding: 20px;
+    text-decoration: none;
+}
+ul.question-tab__list.question-tab__list--scrollable {
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+    height: calc(100vh - 120px);
+}
+
+.question-tab__list-item {
+    color: #b7b7b7;
+    
+}
+
+.question-tab__list-item:hover {
+    color: aliceblue;
+    text-decoration: none;
+    font-weight: 500;
+}
+hr.hr {
+    /* height: 1px; */
+    color: aliceblue;
+    background: #737373;
+}
+div#all_q {
+    height: 60px;
+    font-weight: 600;
+}
+div#all_q {
+    height: 60px;
+    font-weight: 600;
+    color: #bdbdbd;
+    cursor: pointer;
+}
+span.center {
+    margin: auto;
+}
+div#timer {
+    text-align: -webkit-center;
+}
+div#control_panel {
+    height: 42px;
+}
+.d-flex.flex-row {
+    width: 100%;
+}
+div#question_view {
+    height: 100%;
+}
+.text-lightd {
+    color: #ffffffa6;
+    letter-spacing: .7px;
+    word-spacing: 2px;
+}
+
+.text-c1{
+    color: #bfbfbf !important;
+}
+.text-c2 {
+    color: #909090 !important;
+}
+
+.hov-c3:hover {
+    /* background-color: #111827 !important; */
+    color: #bfbfbf !important;
+    border:none;
+    box-sizing: border-box;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.nav-active-h{
+    border-bottom: 1px solid #bfbfbf ;
+}
+body{
+    font-family: 'Roboto', sans-serif !important;
+    color: #e7eeef !important;
+}
+.question-view__title {
+    margin: 0 0 20px;
+    padding: 40px 0 10px;
+    font-size: 20px;
+    border-bottom: 2px solid #e7eeef;
+    color: #deeafa;
+    border-bottom-color: #2e3441;
+}
+p.small-text {
+    font-weight: 300;
+    font-size: 14px;
+    font-family: monospace;
+    color: #deeafac7;
+}
+.pane-splitter__drag-icon {
+    position: absolute;
+}
+div#question_view {
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.small-text {
+    font-size: 14px;
+    font-weight: 300;
+    color: #ffffffe3 !important;
+}
+pre{
+    font-size: 14px;
+    color: #ffffffe3 !important;
+}
+a.active {
+    background: #2e3441;
+    font-weight: 700;
+    color: aliceblue;
+}

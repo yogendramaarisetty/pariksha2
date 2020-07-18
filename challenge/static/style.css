@@ -1,0 +1,106 @@
+body{
+    margin : 0 !important;
+    height : 100vh !important;
+}
+#pNavbar{
+    background-color: white !important;
+    
+}
+.avatar:hover{
+    border: 2px solid #2196F3;
+    cursor: pointer;
+}
+.active {
+    font-weight: 600;
+    border-bottom: 4px solid;
+}
+li.nav-item {
+    margin: 0px 13px;
+}
+.buttonicon {
+    margin-right: 10px;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.buttontext {
+    width: 95px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    text-overflow: ellipsis;
+}
+span.span-highlight {
+    margin: 0px 2rem;
+}
+.form-signin {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+}
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+.form-label-group > input, .form-label-group > label {
+    height: 3.125rem;
+    padding: .75rem;
+}
+body{
+    align-items: center;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px) !important;
+    padding: .375rem .75rem !important;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.form-label-group > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    line-height: 1.5;
+    color: #495057;
+    pointer-events: none;
+    cursor: text;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+}
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+
+.container-fluid.h-auto {
+    overflow: auto;
+}
+.grad {
+    background: -webkit-linear-gradient(#af59f9, #4c34e0) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.container-fluid {
+    height: calc(100vh - 60px) !important;
+}
+.tr-card{
+    height: inherit;
+    padding: 2rem;
+    border-radius: 5px;
+    background-color: #ffffffb5 !important;
+}

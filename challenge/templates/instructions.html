@@ -1,0 +1,35 @@
+{% extends "base.html" %} 
+{% load static%}
+{% block content %} 
+<style>
+body{
+    background-color: #5c5882;
+background-image: url("{% static 'img/code_ bg1'%}");
+background-attachment: fixed;
+background-size: cover;
+}
+</style>
+<br><br>
+<div class="flex">
+<img class="mt-2 float-left" style="width:28rem" src="{% static 'img/code_bg2.svg'%}">
+</div>
+<div class="bg-white shadow pm-auto h-100">
+<h1>{{challenge.title}}</h1>
+<p class="text-dark">{{challenge.description}}</p>
+<strong>{{challenge.duration}} mins</strong>
+<br>
+<em>No. of Questions: <span>{{questions | length}}<span></em>
+<ol>
+<li> This is a timed test. Please make sure you are not interrupted
+              during the test, as the timer cannot be paused once started.</li>
+<li>You will be writing the test in full screen mode</li>
+<li>Please ensure you have a stable internet connection.</li>
+<li>Copy paste is disabled</li>
+<li>Any type of malpractice or plagiarism is not encouraged</li>
+</ol>
+<a href="{% url 'test_page' challenge_id=challenge_id candidate_id=candidate_id%}"><button class="btn btn-small btn-block btn-success ml-auto">Start test</button></a>
+</div>
+</div>
+
+{% load static %}
+{%endblock%}

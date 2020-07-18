@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</head>
+{% if not user.is_authenticated %}
+<style>
+    .container-fluid{
+        background-image: url({% static 'img/undraw_hey_email_liaa' %});
+    background-repeat: unset;
+    cursor: auto;
+    background-size: cover;
+    }
+</style>
+{% endif %}
+
+<body class="bg-light" cz-shortcut-listen="true">
+    <nav id="pNavbar" class="navbar navbar-expand-md navbar-light bg-light block shadow-sm bg-white">
+        <a class="navbar-brand text-primary mr-5 font-weight-normal " href="#"><img src="{% static 'img/logo.svg' %}" width=150></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            {% if user.is_superuser %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+    <!-- <div class="navbar-inline avatar-container"> -->
+        {% if user.is_authenticated %}
+        <img src="{{profile_pic}}" alt="avatar" class="navbar-inline rounded-circle shadow-sm avatar" width=35 height=35 >
+        <div class="btn-group">
+            <button class="btn btn-sm" type="button">
+              <span class="buttontext" data-toggle="tooltip" data-placement="bottom" title="{{username}}">
+            {{username}}
+              </span>
+            </button>
+            <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Challenge</a>
+                <a class="dropdown-item" href="{%url 'logout' %}">Logout</a>
+            </div>
+        
+        {% else %}
+        <a href = "{% url 'google_login' %}?next=/">
+        <button class="btn btn-primary"><span class="fab fa-google fa-1x buttonicon"></span>SignIn with Google</button>
+        </a>
+        {% endif %}
+    <!-- </div>   -->
+    </nav>
+      
+      <div class="container-fluid h-auto ">
+        
+        <main role="main" class="container-lg">
+            {% block content%}
+            {% endblock%}
+        </main> 
+      </div>
+
+
+</body>
+</html>
