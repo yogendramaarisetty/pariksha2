@@ -22,9 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include('allauth.urls')),
     path('',views.home, name="home"),
-    path('djrichtextfield/', include('djrichtextfield.urls')),
     path('loggedout/',auth_views.LogoutView.as_view(template_name="home.html"),name="logout"),
     path('candidate_details/<uuid:challenge_id>', views.candidate_details,name="candidate_details"), 
+    path('sample_lang_codes/', views.sample_language_codes,name="sample_language_codes"), 
     path('challenge_instructions/<uuid:challenge_id>/<uuid:candidate_id>', views.instructions,name="instructions"),
     path('challenge_instructions/<uuid:challenge_id>/<uuid:candidate_id>/test_page/running', views.test_page,name="test_page")
 ]

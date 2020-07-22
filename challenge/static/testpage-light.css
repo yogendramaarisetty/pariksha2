@@ -45,7 +45,7 @@ body{
     box-sizing: border-box;
 }
 .gutter.gutter-horizontal {
-    cursor: ew-resize;
+    cursor: col-resize;
 }
 
 .main-c {
@@ -66,8 +66,8 @@ body{
 .dtheme-c1{
     background-color: #2e3441 !important;
 }
-.utility-bar{
-    height: 50px;
+.utility-bar {
+    height: 60px;
     width: 100%;
 }
 .dtheme-c2{
@@ -77,7 +77,7 @@ body{
     background-color: #111827 !important;
 }
 div#editor {
-    height: calc(100% - 50px);
+    height: calc(100% - 60px);
 
 }
 .gutter-horizontal:hover {
@@ -251,7 +251,7 @@ div#question_view {
 
 .hov-c3:hover {
     /* background-color: #111827 !important; */
-    color: #bfbfbf !important;
+    color: #abb8ca !important;
     border:none;
     box-sizing: border-box;
 }
@@ -291,14 +291,29 @@ div#question_view {
 .small-text {
     font-size: 14px;
     font-weight: 300;
-    color: #ffffffe3 !important;
+    color: #b5c0d0 !important;
+    /* font-stretch: extra-expanded !important; */
 }
 pre{
     font-size: 14px;
-    color: #ffffffe3 !important;
+    color: #b5c0d0 !important;
 }
 a.active {
     background: #2e3441;
     font-weight: 700;
     color: aliceblue;
+}
+.line-numbers {
+    color: #848d9a !important;
+}
+
+.myContentClass {
+	background: #a800003f;
+}
+/* .myGlyphMarginClass {
+    background-image:url("https://image.flaticon.com/icons/svg/929/929416.svg");
+    background-size: 30px 30px ;
+} */
+.text-c2 {
+    color: #aab6c7ad !important;
 }

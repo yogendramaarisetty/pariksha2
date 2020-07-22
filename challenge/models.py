@@ -27,6 +27,8 @@ class Question(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
     title=models.CharField(max_length=50)
     description= RichTextField()
+    def __str__(self):
+        return f'{self.title}'
 
 class Language(models.Model):
     id=models.IntegerField(primary_key=True)
@@ -65,6 +67,8 @@ class CodeDraft(models.Model):
     code = models.TextField()
 
 class QuestionLanguageDefault(models.Model):
+    class Meta:
+        unique_together = [['question','language'],]
     question  = models.ForeignKey(Question,on_delete=models.CASCADE,null=True)
     language  = models.ForeignKey(Language,on_delete=models.CASCADE,null=True)
     code = models.TextField()
@@ -94,4 +98,8 @@ class ChallengeLanguages(models.Model):
 class SampleLanguageCodes(models.Model):
     language = models.ForeignKey(Language,unique=True, on_delete=models.CASCADE,null = True)
     code = models.TextField()
-    
+
+class Solution(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE, null=True)
+    solution = models.TextField(blank=True)

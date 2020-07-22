@@ -27,10 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+from djangoeditorwidgets.config import *
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
+    'colorfield',
+     'djangoeditorwidgets',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,12 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    
     'challenge',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
     'crispy_forms',
     'corsheaders',
     'rest_framework',
@@ -144,11 +147,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
+X_FRAME_OPTIONS='SAMEORIGIN' # only if django version >= 3.0
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 SITE_ID = 1
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,"challenge/static")
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CORS_ORIGIN_ALLOW_ALL = True

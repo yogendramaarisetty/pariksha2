@@ -5,7 +5,7 @@ require(['vs/editor/editor.main'], function () {
             inherit: true, // can also be false to completely replace the builtin rules
             rules: [
                 { background: '#1c2434' },
-                { token: '', foreground: 'D2D2D2', background: '1C2430' },
+                { token: '', foreground: '61afef', background: '1C2430' },
                 { token: 'invalid', foreground: 'f44747' },
                 { token: 'emphasis', fontStyle: 'italic' },
                 { token: 'strong', fontStyle: 'bold' },
@@ -13,13 +13,13 @@ require(['vs/editor/editor.main'], function () {
                 { token: 'variable.predefined', foreground: '4864AA' },
                 { token: 'variable.parameter', foreground: '9CDCFE' },
                 { token: 'constant', foreground: '569CD6' },
-                { token: 'comment', foreground: '608B4E' },
+                { token: 'comment', foreground: '7f848e' },
                 { token: 'number', foreground: 'B5CEA8' },
                 { token: 'number.hex', foreground: '5BB498' },
                 { token: 'regexp', foreground: 'B46695' },
                 { token: 'annotation', foreground: 'cc6666' },
                 { token: 'type', foreground: 'f78c6c' },
-                { token: 'delimiter', foreground: '89ddff' },
+                { token: 'delimiter', foreground: 'dcdcdc' },
                 { token: 'delimiter.html', foreground: '808080' },
                 { token: 'delimiter.xml', foreground: '808080' },
                 { token: 'tag', foreground: '569CD6' },
@@ -40,9 +40,9 @@ require(['vs/editor/editor.main'], function () {
                 { token: 'attribute.value.number.css', foreground: 'B5CEA8' },
                 { token: 'attribute.value.unit.css', foreground: 'B5CEA8' },
                 { token: 'attribute.value.hex.css', foreground: '82aaff' },
-                { token: 'string', foreground: 'c3e88d' },
+                { token: 'string', foreground: '98c379' },
                 { token: 'string.sql', foreground: 'FF0000' },
-                { token: 'keyword', foreground: 'c792ea', fontStyle: 'bold' },
+                { token: 'keyword', foreground: 'e06c75', fontStyle: 'bold' },
                 { token: 'keyword.flow', foreground: 'C586C0' },
                 { token: 'keyword.json', foreground: 'CE9178' },
                 { token: 'keyword.flow.scss', foreground: '569CD6' },
@@ -52,28 +52,34 @@ require(['vs/editor/editor.main'], function () {
                 { token: 'predefined.sql', foreground: 'FF00FF' },
             ],
             colors: {
-                'editor.foreground': '#ababab',
+                'editor.foreground': '#61afef',
                 'editor.background': '#1c2434'
             }
             
         });
        
 
-       editor = monaco.editor.create(document.getElementById('editor'), {
-            value: [
-                'function x() {',
-                '\tconsole.log("Hello world!");',
-                '}',
-                
-            ].join('\n'),
+       var Ieditor = monaco.editor.create(document.getElementById('editor'), {
+            value: '',
             language: 'javascript',
             theme: "myCustomTheme",
             automaticLayout: true,
             readOnly: false,
                 mouseWheelZoom: true,
-                // glyphMargin:true,
-            fontSize: '17px'
+                glyphMargin:true,
+            fontSize: '16px'
         });
+        
+// var decorations = editor.deltaDecorations([], [
+// 	{
+// 		range: new monaco.Range(3,1,3,1),
+// 		options: {
+// 			isWholeLine: true,
+// 			className: 'myContentClass',
+// 			glyphMarginClassName: 'myGlyphMarginClass'
+// 		}
+// 	}
+// ]);
 
         // editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_C, () => null);
         // editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_V, () => null);
@@ -85,6 +91,7 @@ require(['vs/editor/editor.main'], function () {
         // );
 
 var currentActiveQuestion = null;
+var currentQuestionCodes = null;
 var currentActiveLanguage = $("#language option:first").val();
 var editor = monaco.editor.getModels()[0];
 $hideContainer = $('#q_hider');
@@ -111,9 +118,12 @@ $questionPage = $('#question_view');
             },
             success: function(json){
                 console.log(json);
+                currentQuestionCodes = json;
+                changeLanguage(currentActiveLanguage);
+              
             },
-            error: function(err){
-                console.log(err);
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log(errorThrown);
             }
      });
 
@@ -125,15 +135,19 @@ $questionPage = $('#question_view');
 
     function changeLanguage(lang){
         monaco.editor.setModelLanguage(editor,lang);
+        editor.setValue(currentQuestionCodes['codes'][lang]);
     }
 
+    Ieditor.onDidChangeModelContent(e => {
+        currentQuestionCodes['codes'][currentActiveLanguage] = editor.getValue();
+    });
+    
     var btnLoaderElement = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     Running...`;
 
     $('#run').on('click',function(){
         $('#run').prop('disabled',true);
         $('#run').html(btnLoaderElement);
-        console.log(currentActiveQuestion)
         $.ajax({
             type: 'POST',url: '',dataType: 'json',cache: false,async: true,
             data: {
@@ -143,16 +157,30 @@ $questionPage = $('#question_view');
                code: editor.getValue()
             },
             success: function(json){
-                alert(json);
+               console.log(JSON.stringify(json));
             },
+            statusCode: {
+                404: function() {
+                  alert( "page not found" );
+                },
+                500: function(){
+                    alert( "internal server error" );
+                },
+
+              },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(errorThrown);
+                $('#run').prop('disabled',false);
+                $('#run').html('<i class="fas fa-play"></i> Run');
              }
-     });
-     $('#run').prop('disabled',false);
-     $('#run').html('Run');
+     }).done(function() {
+        $('#run').prop('disabled',false);
+        $('#run').html('<i class="fas fa-play"></i> Run');
+      });
+    
+       }) 
+  
     });
       
-    });
 
 
