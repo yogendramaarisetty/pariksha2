@@ -42,12 +42,16 @@ def coderun_api(code,language,input,timeout,expected_output):
 def encode_response(res_dict,status):
     if status== "Compilation Error":
         res_dict["compile_output"] = base64.b64decode(res_dict["compile_output"]).decode('utf-8')
+        res_dict["class"] = "CE"
     elif status == "Accepted" or status == "Wrong Answer":
         res_dict["stdout"] = base64.b64decode(res_dict["stdout"]).decode('utf-8')
+        res_dict["class"] = "Accept"
     elif status == "Time Limit Exceeded":
         res_dict["message"] = base64.b64decode(res_dict["message"]).decode('utf-8')
+        res_dict["class"] = "TLE"
     elif "Runtime Error" in status:
         res_dict["message"] = base64.b64decode(res_dict["message"]).decode('utf-8')
         res_dict["stderr"] = base64.b64decode(res_dict["stderr"]).decode('utf-8')
+        res_dict["class"] = "RE"
     return res_dict
     

@@ -94,8 +94,14 @@ var currentActiveQuestion = null;
 var currentQuestionCodes = null;
 var currentActiveLanguage = $("#language option:first").val();
 var editor = monaco.editor.getModels()[0];
-$hideContainer = $('#q_hider');
-$questionPage = $('#question_view');
+var $consoleHider = $("#console_hider");
+var $console = $("#console");
+var $customInputBtn = $("#custom_input");
+var $testcaseResultsBtn = $("#testcase_results"); 
+var $run = $('#run');
+var $hideContainer = $('#q_hider');
+var $questionPage = $('#question_view');
+
     
     $('.q_btn').on('click',function(){
         console.log(this);
@@ -107,6 +113,7 @@ $questionPage = $('#question_view');
         $(`#${this.id}`).addClass('active');
         $(`#desc_${this.id}`).appendTo($questionPage);
     })
+
     function get_codes(q_id){
         currentActiveQuestion = q_id;
         console.log(currentActiveQuestion);
@@ -128,6 +135,7 @@ $questionPage = $('#question_view');
      });
 
     }
+   
     $("#language").on("change",function(){
         currentActiveLanguage = this.value;
         changeLanguage(this.value);
@@ -139,15 +147,15 @@ $questionPage = $('#question_view');
     }
 
     Ieditor.onDidChangeModelContent(e => {
-        currentQuestionCodes['codes'][currentActiveLanguage] = editor.getValue();
+        currentQuestionCodes['codes'][currentActiveLanguage] = editor.getValue(); //upadte current question code data
     });
     
     var btnLoaderElement = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     Running...`;
 
-    $('#run').on('click',function(){
-        $('#run').prop('disabled',true);
-        $('#run').html(btnLoaderElement);
+    $run.on('click',function(){
+        $run.prop('disabled',true);
+        $run.html(btnLoaderElement);
         $.ajax({
             type: 'POST',url: '',dataType: 'json',cache: false,async: true,
             data: {
@@ -170,15 +178,28 @@ $questionPage = $('#question_view');
               },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(errorThrown);
-                $('#run').prop('disabled',false);
-                $('#run').html('<i class="fas fa-play"></i> Run');
+                $run.prop('disabled',false);
+                $run.html('<i class="fas fa-play"></i> Run');
              }
      }).done(function() {
         $('#run').prop('disabled',false);
         $('#run').html('<i class="fas fa-play"></i> Run');
+        $console.children().appendTo($consoleHider);
+        $("[data=run]").appendTo($console);
       });
     
        }) 
+    
+    $testcaseResultsBtn.on('click',function(){
+        $console.children().appendTo($consoleHider);
+        $("[data=testcase_results]").appendTo($console);
+    })
+    
+
+
+
+
+
   
     });
       

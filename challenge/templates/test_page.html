@@ -95,16 +95,13 @@
                     </select>
                 </div>
                 <div id="editor" class="editor-container .d-sm-none .d-md-block">
-
-
                 </div>
             </div>
             <div id="bottom_pane" class="dtheme-c2">
                 <div id="control_panel" class="dtheme-c1 d-flex flex-row">
-                    
-                    <div class="d-flex align-items-stretch flex-row bd-highlight">
-                        <div class="p-2 pr-3 pl-3 font-weight-bold cursor-pointer bd-highlight text-c2 hov-c3" attr="testcase_reult">Testcase Results</div>
-                        <div class="p-2 pr-3 pl-3 font-weight-bold cursor-pointer bd-highlight text-c2 hov-c3" attr="custom_input">Custom Input</div>
+                    <div id="ctrl_btns" class="d-flex align-items-stretch flex-row bd-highlight w-100">
+                        <div id="testcase_results" class="p-2 pr-3 pl-3 font-weight-bold cursor-pointer bd-highlight text-c2 hov-c3" attr="testcase_reult">Testcase Results</div>
+                        <div id="custom_input" class="p-2 pr-3 pl-3 font-weight-bold cursor-pointer bd-highlight text-c2 hov-c3" attr="custom_input">Custom Input</div>
                         <button id="run" class="btn btn-dark  dtheme-c3 ml-auto mr-2 rounded-0 p-2 pr-3 pl-3 bd-highlight" type="button">
                             <i class="fas fa-play"></i>  Run
                           </button>
@@ -112,26 +109,63 @@
                             Submit
                           </button>
                     </div>
-                    
-                    </div>
-                    <div class="d-none console_hider"></div>
-                    <div class="d-flex p-2 console h-100" id="console">
-
-                      
-                    <!-- <div id="ctrl_btns" class="d-flex flex-row w-auto float-right ml-auto">
-                    <button id="run" class="btn btn-success" type="button" disabled>
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        Running...
-                    </button>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Running...
-                    <button id="submit" class="btn btn-dark submit p-2 pr-4 pl-4 rounded-0 mr-3">Submit</button>
-                </div> -->
                 </div>
-               
+                <div class="d-none console_hider" id="console_hider">
+                    <div class="w-100 pr-4 pl-4 pt-2 pb-2" data="testcase_results">
+                       <div class="testcase_status_msg error d-flex mb-2">2/4 Testcases passed :(</div>
+                        <div class="wrap d-flex w-100 h-auto shadow-lg">
+                            <ul class="tab-list float-left">
+                                <li id="t1" class="tab-item success">Testcase 1</li>
+                                <li id="t2" class="tab-item error">Testcase 2 cded</li>
+                                <li id="t3" class="tab-item error">Testcase 3</li>
+                                <li id="t4" class="tab-item success">Testcase 4</li>
+                            </ul>
+                            <div class="tc-list-item-hider d-none"></div>
+                            <div class="list-item-details details p-4 d-flex">
+                               
+                                <div class="item-description w-100" for-id="t1">
+                                    <div class="status">
+                                        <div class="label d-block">Status</div>
+                                        <pre class="d-flex">Accepted
+                                        </pre>
+                                    </div>
+                                    <div class="tc-input">
+                                        <div class="label">Input</div>
+                                        <pre class="d-flex">12\n23</pre>
+                                    </div>
+                                    <div class="your-output">
+                                        <div class="label">Your Output</div>
+                                        <pre class="d-flex">12\n23</pre>
+                                    </div>
+                                    <div class="expected-output">
+                                        <div class="label">Expected Output</div>
+                                        <pre class="d-flex">12\n23</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data="custom_input">
+                        <textarea id="custom_input_field"></textarea>
+                    </div>
+                    <div data="run">
+                    </div>
+                </div>
+                <div class="d-flex p-2 console h-100" id="console">
+                </div>
+                <script>
+                     var currentActiveListElem = null;
+                        $(".tab-item").on('click',function(){
+                            if (currentActiveListElem !=null)
+                            $(currentActiveListElem).removeClass("active");
+                            $(this).addClass("active");
+                            currentActiveListElem = this;
+                        })
+                </script>
             </div>
         </div>
     </div>
+    
     <script src="https://unpkg.com/split.js/dist/split.min.js "></script>
     <script>
         $(document).ready(function () {
@@ -145,7 +179,7 @@
                 gutterSize: 10,
                 sizes: [90, 10],
                 direction: 'vertical',
-                minSize: 40,
+                minSize: [100,40]
 
             });
             $(document).ready(function () {
