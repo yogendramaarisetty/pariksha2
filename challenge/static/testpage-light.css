@@ -355,12 +355,13 @@ li.active {
             overflow-y: auto;
             margin: 0;
             direction: rtl;
-            box-shadow: inset -3px 0px 7px #00000012;
+            box-shadow: inset -3px 0px 11px #101725;
         }
        
 .label {
-    color: #546686;
+    color: #6a778e;
     font-weight: 300;
+    font-size:14px;
     letter-spacing: 1px;
 }
 
@@ -401,4 +402,54 @@ div#console {
     padding: 2px 22px;
     background-color: #202938;
 
+}
+h4.SUCCESS {
+    color: #28a745;
+}
+
+
+h4.WRONG {
+    color: #db2644;
+}
+h4.CE {
+    color: #db2644;
+}
+pre.CE {
+    background: #27090da6;
+    color: #dc3545f2 !important;
+}
+h4.RE {
+    color: #b77119;
+}
+h4.TLE {
+    color: #b76722;
+}
+pre.RE {
+    color: #a05900 !important;
+    background: #1f140569;
+}
+.badge-dark {
+    color: #bbb !important;
+    background-color: #43454a !important;
+}
+.badge-success {
+    color: #252525 !important;
+    background-color: #28a745;
+}
+.badge-danger {
+    color: #0f1523 !important;
+    background-color: #dc3545 !important;
+}
+.badge{
+padding: .4em .5em !important;
+}
+.badge-warning {
+    color: #212529;
+    background-color: #ce8c1e !important;
+}
+.loading-text {
+    font-size: 18px !important;
+    position: absolute;
+    color: cornflowerblue;
+    top: 25%;
 }

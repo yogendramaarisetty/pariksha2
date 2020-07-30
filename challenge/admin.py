@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
-from .models import Candidate,Challenge,Question,ChallengeLanguages,Language,ChallengeQuestion,CandidateChallenge,QuestionLanguageDefault,Submission,TestCase,CodeDraft,SampleLanguageCodes
+from .models import JudgeApiKey,Candidate,Challenge,Question,ChallengeLanguages,Language,ChallengeQuestion,CandidateChallenge,QuestionLanguageDefault,Submission,TestCase,CodeDraft,SampleLanguageCodes
 admin.site.register(Candidate)
 class questionInline(admin.StackedInline):
     model = ChallengeQuestion
@@ -27,4 +27,5 @@ admin.site.register(Submission)
 admin.site.register(TestCase)
 admin.site.register(CodeDraft)
 admin.site.register(SampleLanguageCodes)
+admin.site.register(JudgeApiKey)
 

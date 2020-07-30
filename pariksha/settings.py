@@ -25,7 +25,7 @@ SECRET_KEY = '1tybl3g(z3t9n^s+zp_k64!_!i62j2=usdtc5dd-53u1pdql-b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 from djangoeditorwidgets.config import *
 # Application definition
@@ -137,6 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
+API_ENV = "production1"
 
 LANGUAGE_CODE = 'en-us'
 
