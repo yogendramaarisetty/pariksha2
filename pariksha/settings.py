@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+
+# OR, the same with increased verbosity
+load_dotenv(verbose=True)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -100,10 +104,10 @@ WSGI_APPLICATION = 'pariksha.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'xdungijy',
-        'USER':'xdungijy',
-        'PASSWORD':'xhQIYG_mdLHjQKwI94rnUtxnkDF54bY1',
-        'HOST':'satao.db.elephantsql.com',
+        'NAME': os.getenv("pariksha2dbName"),
+        'USER':os.getenv("pariksha2dbUser"),
+        'PASSWORD':os.getenv("pariksha2dbPassword"),
+        'HOST':os.getenv("pariksha2dbHost"),
         'PORT':'5432',
     }
 }

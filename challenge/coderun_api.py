@@ -87,3 +87,14 @@ def run_sample(code, language, question):
         if response["status"]["description"] != "Accepted":
             return result
     return result
+ 
+def submit_code(code,language,question):
+    testcases = TestCase.objects.filter(question=question)
+    customResponse = []
+    for tc in testcases:
+        response = coderun_api(code, language, st.tinput, st.toutput, st.timeout)
+        
+        filterResponse['status'] = response['status']
+
+
+
