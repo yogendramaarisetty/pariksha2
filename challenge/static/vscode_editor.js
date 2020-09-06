@@ -188,12 +188,13 @@ var $questionPage = $('#question_view');
      });
 
     }
-   
+    monaco.editor.setModelLanguage(editor, $("#language option:selected")[0].value);
+ 
     $("#language").on("change",function(){
         currentActiveLanguage = this.value;
         changeLanguage(this.value);
     });
-
+    $("#language option:selected");
     function changeLanguage(lang){
         monaco.editor.setModelLanguage(editor,lang);
         editor.setValue(currentQuestionCodes['codes'][lang]);

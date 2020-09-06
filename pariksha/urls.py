@@ -15,16 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from challenge import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include('allauth.urls')),
+     path('auth/',include('django.contrib.auth.urls')),
     path('',views.home, name="home"),
     path('loggedout/',auth_views.LogoutView.as_view(template_name="home.html"),name="logout"),
+    path('management/',include('challenge.urls')),
     path('candidate_details/<uuid:challenge_id>', views.candidate_details,name="candidate_details"), 
     path('sample_lang_codes/', views.sample_language_codes,name="sample_language_codes"), 
     path('challenge_instructions/<uuid:challenge_id>/<uuid:candidate_id>', views.instructions,name="instructions"),
-    path('challenge_instructions/<uuid:challenge_id>/<uuid:candidate_id>/test_page/running', views.test_page,name="test_page")
-]
+    path('test/<uuid:challenge_id>/<uuid:candidate_id>/test_page/running', views.test_page,name="test_page"),
+url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

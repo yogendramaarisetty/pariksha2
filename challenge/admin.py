@@ -17,6 +17,8 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [
         testcaseInline,
     ]
+class ApiKeyAdmin(admin.ModelAdmin):
+    list_display  = ('name','active')
 admin.site.register(Question,QuestionAdmin)
 admin.site.register(ChallengeLanguages)
 admin.site.register(Language)
@@ -27,5 +29,5 @@ admin.site.register(Submission)
 admin.site.register(TestCase)
 admin.site.register(CodeDraft)
 admin.site.register(SampleLanguageCodes)
-admin.site.register(JudgeApiKey)
+admin.site.register(JudgeApiKey,ApiKeyAdmin)
 

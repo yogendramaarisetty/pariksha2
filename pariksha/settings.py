@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'djrichtextfield',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -137,7 +138,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
-API_ENV = "production1"
+CODE_API_ENV = "production1"
+
+#CODE_API_ENV = "nodeAPI"
 
 LANGUAGE_CODE = 'en-us'
 
@@ -157,3 +160,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,"challenge/static")
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CORS_ORIGIN_ALLOW_ALL = True
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'challenge/media')
+MEDIA_URL = '/media/'
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = "uploads/"

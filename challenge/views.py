@@ -161,3 +161,6 @@ def test_page(request, challenge_id, candidate_id):
         'languages': Language.objects.all(),
     }
     return render(request, 'test_page.html', data)
+
+def create_test(request):
+    return render(request,'create_test.html');

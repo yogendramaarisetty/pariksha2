@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'font/stylesheet.css' %}">
+   
+<link rel="stylesheet" href="{% static 'challenge/css/timer.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
@@ -44,6 +47,7 @@
     background-position: right;
     opacity: 0.7;
 }
+
         </style>
 </head>
 
@@ -102,14 +106,18 @@
 </circle>
 </svg>
 </div>
+<script src="{% static 'challenge/js/timer.js' %}"></script>
+
 <script>
+ 
+
 var customElement = $("#loader")[0];
 var roundLoader =$('#round-loader')[0];
 var splitV;
 $(document).ready(function(){
 
 
-
+ $('.q_btn')[0].click();
 setTimeout(function(){
     $('.q_btn')[0].click();
    $('#whole-wrap').removeClass("d-none");
@@ -148,7 +156,7 @@ setTimeout(function(){
 
 
 
-console.log(customElement[0]);
+//console.log(customElement[0]);
 $.LoadingOverlay("show", {
     image       : "",
     fontawesome : "",                              // String/Boolean
@@ -182,7 +190,7 @@ $.LoadingOverlay("show", {
     <div id="whole-wrap" class="d-none">
     <div class="float-left qnav dtheme-c3" width="70px">
         <div id="timer" class="dtheme-c1 d-flex p-2">
-            <span class="center text-light">40m Left</span>
+            <div id="timer1"></div>
         </div>
         <div id="qtab" class="dtheme-c3">
         
@@ -308,10 +316,32 @@ $.LoadingOverlay("show", {
     <script>
     </script>
     <script src="{% static 'node_modules/monaco-editor/min/vs/loader.js'%}"></script>
+   <style>
+   .base-timer {
+    position: relative;
+    width: 49px;
+    height: 49px;
+}
+.base-timer__label {
+    position: absolute;
+    width: 49px;
+    height: 49px;
+    color: antiquewhite;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+}
+   </style>
     <script>
         var vspath = "{% static 'node_modules/monaco-editor/min/vs' %}";
     require.config({ paths: { 'vs': "{% static 'node_modules/monaco-editor/min/vs' %}" } });
+     const t1 =  timer("timer1",30,function (){
     
+   });
+
     
     </script>
    <script src="{% static 'vscode_editor.js'%}"></script>

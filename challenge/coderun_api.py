@@ -3,15 +3,13 @@ import base64
 from .models import TestCase,JudgeApiKey
 from pariksha.settings import *
 
-
+current_env = JudgeApiKey.objects.filter(active=True).first()
 def coderun_api(code, language, input, expected_output, timeout):
-    print(API_ENV)
-    key = JudgeApiKey.objects.get(name=API_ENV).key
-    print(key)
+    print(current_env.key,current_env.name)
     url = "https://judge0.p.rapidapi.com/submissions"
     headers = {
         'x-rapidapi-host': "judge0.p.rapidapi.com",
-        'x-rapidapi-key': key,
+        'x-rapidapi-key': current_env.key,
         'content-type': "application/json",
         'accept': "application/json"
     }
@@ -66,7 +64,7 @@ def encode_response(res_dict, status):
             res_dict["msg"] += f'\n{res_dict["message"]}'
             res_dict["class"] = "TLE"
     elif "Runtime Error" in status:
-        if res_dict["message"] != None and res_dict["stderr"] != None:
+        if res_dict["message"] is not None and res_dict["stderr"] is not None:
             res_dict["message"] = base64.b64decode(res_dict["message"]).decode('utf-8')
             res_dict["stderr"] = res_dict["msg"] = base64.b64decode(res_dict["stderr"]).decode('utf-8')
             res_dict["msg"] += f'\n{res_dict["message"]}'

@@ -1,35 +1,81 @@
 {% extends "base.html" %} 
 {% load static%}
 {% block content %} 
+<link rel="stylesheet" href="{% static 'challenge/css/timer.css' %}">
 <style>
 body{
     background-color: #5c5882;
-background-image: url("{% static 'img/code_ bg1'%}");
+background-image: url("{% static 'img/code_bg1'%}");
 background-attachment: fixed;
 background-size: cover;
 }
+div#timer1 {
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 5rem;
+}
 </style>
-<br><br>
-<div class="flex">
-<img class="mt-2 float-left" style="width:28rem" src="{% static 'img/code_bg2.svg'%}">
-</div>
-<div class="bg-white shadow pm-auto h-100">
-<h1>{{challenge.title}}</h1>
-<p class="text-dark">{{challenge.description}}</p>
-<strong>{{challenge.duration}} mins</strong>
-<br>
-<em>No. of Questions: <span>{{questions | length}}<span></em>
-<ol>
-<li> This is a timed test. Please make sure you are not interrupted
-              during the test, as the timer cannot be paused once started.</li>
-<li>You will be writing the test in full screen mode</li>
-<li>Please ensure you have a stable internet connection.</li>
-<li>Copy paste is disabled</li>
-<li>Any type of malpractice or plagiarism is not encouraged</li>
-</ol>
-<a href="{% url 'test_page' challenge_id=challenge_id candidate_id=candidate_id%}"><button class="btn btn-small btn-block btn-success ml-auto">Start test</button></a>
+<div class="container p-3">
+    <div class="row">
+        <div class="col">Enter Test PIN<i class="fas ml-2 text-success fa-check-circle"></i>  </div>
+        <div class="col">Fill details <i class="fas ml-2 text-success fa-check-circle"></i> </div>
+        <div class="col">Read Instructions </div>
+        <div class="col">Take test </div>
+    </div>
+    <div class="progress mt-1" style="height:8px">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%"></div>
 </div>
 </div>
+<hr>
+<div class="container">
+    <div class="row">
+   
 
-{% load static %}
-{%endblock%}
+        <div class="col-8">
+          
+         <h2 >{{challenge.title}}</h3>
+         <div class="alert alert-success">
+            <p class="text-dark">{{challenge.description}}</p>
+            <strong>{{challenge.duration}} mins</strong>
+            <em>No. of Questions: <span>{{questions | length}}<span></em>
+  </div>
+            <h2><strong> Test Instructions </strong></h2>
+            <ol>
+            <li>Before you attempt programming questions, you should choose a language from the given list.</li>
+            <li>All inputs for the programming problems are from STDIN and output to STDOUT.</li>
+           <li>Programming questions have a Compile &amp; Run option which you can use to run your solution against sample test cases before submitting it.</li>
+            <li>You can submit the solution for a programming problem 300 times per day. For subjective and objective problems, you can change your answer as many times as you want.</li>
+            </ol>
+            <h4>Question-specific Instructions</h4>
+            <div>
+            <div><strong> Programming </strong></div>
+            <ul>
+            <li>Select a programming language from the list before attempting each question.</li>
+            <li>For all programming problems, the inputs are taken from STDIN and output to STDOUT.</li>
+            <li>Click COMPILE &amp; TEST to run your solution against relevant sample test cases before submitting your answer. This is applicable for programming questions only.</li>
+            <li>You can start solving problems now</li>
+            <li>Start Test.</li>
+            </ul>
+            <p><strong> Important: </strong></p>
+              <p>This test can only be taken in full-screen mode on.</p>
+            <div class="alert alert-warning" role="alert">All popups/tabs/window switches will log you out of the test automatically. We recommend that you close all programs including your email before you start.</div>
+          
+            </div>
+        </div>
+        <div class="col">
+            <div class="alert alert-primary" role="alert">
+            You can start test after the timer ends. Please read the instructions carefully.
+            </div>
+            <div id="timer1"></div>
+            <a href="{% url 'test_page' challenge_id=challenge_id candidate_id=candidate_id%}" type="button" id="start" class="btn btn-success btn-lg btn-block disabled" >Start test</a>
+        </div>
+    </div>
+</div>
+<script src="{% static 'challenge/js/timer.js' %}"></script>
+<script >
+   const t1 =  timer("timer1",30,function (){
+       $("#start").removeClass('disabled');
+   });
+   
+</script>
+{% endblock %}

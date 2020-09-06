@@ -3,8 +3,6 @@
 
 {% load static %}
 
-
-<br><br>
 {% if not  user.is_authenticated %}
 <style>
 {% comment %} body{
@@ -273,6 +271,17 @@ tl.from(bgd, 0.2, { opacity: 0, scale: 0, transformOrigin: "center center" })
 </script>
 
 {% else %}
+<div class="container p-3">
+    <div class="row">
+        <div class="col">Enter Test PIN</div>
+        <div class="col">Fill details  </div>
+        <div class="col">Read Instructions </div>
+        <div class="col">Take test </div>
+    </div>
+    <div class="progress mt-1" style="height:8px">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 10%"></div>
+</div>
+</div>
 <form class="form-signin" id="pin_form" method="post">
 {% csrf_token %}
   <div class="text-center mb-4">
@@ -280,7 +289,7 @@ tl.from(bgd, 0.2, { opacity: 0, scale: 0, transformOrigin: "center center" })
   </div>
 
   <div class="form-label-group input-group-sm">
-    <input type="text" name="pin" maxlength="8" id="inputPin" class="form-control" placeholder="Challenge PIN" required=true>
+    <input type="password" name="pin" maxlength="8" id="inputPin" class="form-control" placeholder="Challenge PIN" required=true>
     <label for="inputPin"></label>
   </div>
  {% if error %}

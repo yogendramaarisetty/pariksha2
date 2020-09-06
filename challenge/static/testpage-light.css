@@ -172,13 +172,11 @@ span.select2-dropdown.select2-dropdown--below {
 }
 .theme-m a, .theme-m label, .theme-m p {
     font-weight: 400;
-    font-family: Arial,Helvetica,sans-serif;
-    font-family: var(--font-family-text);
+    font-family: 'Euclid Circular A' !important;
 }
 .theme-m a, .theme-m label, .theme-m p {
     font-weight: 400;
-    font-family: Arial,Helvetica,sans-serif;
-    font-family: var(--font-family-text);
+  font-family: 'Euclid Circular A' !important;
 }
 .question-tab__list-item--answered {
     color: #576871;
@@ -263,8 +261,7 @@ div#question_view {
     border-bottom: 1px solid #bfbfbf ;
 }
 body{
-    font-family: 'Roboto', sans-serif !important;
-    color: #e7eeef !important;
+    font-family: 'Euclid Circular A' !important;
 }
 .question-view__title {
     margin: 0 0 20px;

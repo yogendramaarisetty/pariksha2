@@ -1,3 +1,21 @@
+:root{
+--devsite-tab-marker-position-x: 22px;
+--devsite-tabs-wrapper-x: 6px;
+--devsite-link-font: 500 14px/20px Google Sans,Noto Sans,Noto Sans JP,Noto Sans KR,Noto Naskh Arabic,Noto Sans Thai,Noto Sans Hebrew,Noto Sans Bengali,sans-serif;
+--devsite-link-padding: 0 18px;
+--devsite-link-text-transform: none;
+--devsite-dropdown-tab-padding-x: 18px;
+--devsite-dropdown-toggle-padding-x: 12px;
+--devsite-overflow-menu-border-radius: 4px;
+--devsite-overflow-menu-top: 44px;
+--devsite-overflow-tab-padding: 0 18px;
+--devsite-tab-marker-border-radius: 3px 3px 0 0;
+--devsite-tab-marker-height: 3px;
+--devsite-tab-marker-inset-x: 4px;
+--devsite-tab-marker-position-x: 22px;
+--devsite-upper-tab-font-weight: 500;
+}
+
 body{
     margin : 0 !important;
     height : 100vh !important;
@@ -11,8 +29,24 @@ body{
     cursor: pointer;
 }
 .active {
+
+
     font-weight: 600;
-    border-bottom: 4px solid;
+}
+
+.active a.nav-link:after  {
+    border-radius: 0;
+    border-radius: var(--devsite-tab-marker-border-radius,0);
+    height: 2px;
+    height: var(--devsite-tab-marker-height,2px);
+    left: 0;
+    left: var(--devsite-tab-marker-position-x,0);
+    right: 0;
+    right: var(--devsite-tab-marker-position-x,0);
+    bottom: 0;
+    content: "";
+    display: block;
+    position: absolute;
 }
 li.nav-item {
     margin: 0px 13px;
