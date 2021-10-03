@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render, redirect
 from .models import Candidate, Challenge, Question, SampleLanguageCodes, ChallengeLanguages, Language, \
     ChallengeQuestion, CandidateChallenge, QuestionLanguageDefault, Submission, TestCase, CodeDraft
@@ -9,7 +10,7 @@ from django.http import HttpResponse, Http404
 from django.core import serializers
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
-from .coderun_api import coderun_api, run_sample
+from .judge_api import coderun_api, run_sample
 
 global user_data
 user_data = {'name': '', 'picture': ''}
@@ -164,3 +165,28 @@ def test_page(request, challenge_id, candidate_id):
 
 def create_test(request):
     return render(request,'create_test.html');
+
+
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer, TemplateHTMLRenderer
+
+
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view,permission_classes, renderer_classes
+from django.http.response import JsonResponse
+from .serializers import CompileRunRequestSerializer
+from .tasks import * 
+from .compile_run_entities import *
+import json
+@api_view(['POST'])
+@renderer_classes([JSONRenderer,BrowsableAPIRenderer])
+def candidate_compile_run(request):
+    #https://github.com/VincentTide/django-channels-celery-example/blob/master/templates/jobs/index.html
+    cr_request = CompileRunRequestSerializer(data=request.data)
+    if cr_request.is_valid():
+        cr_request = request.data
+        task = candidate_compile_run_task.delay(cr_request)
+        return JsonResponse({'taskid':task.task_id})
+    else:
+        return JsonResponse(cr_request.errors)

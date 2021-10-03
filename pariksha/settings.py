@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'djrichtextfield',
     'ckeditor',
+    'django_celery_results',
+    'celery_progress',
 ]
 
 MIDDLEWARE = [
@@ -97,28 +99,36 @@ DJRICHTEXTFIELD_CONFIG = {
     }
 }
 WSGI_APPLICATION = 'pariksha.wsgi.application'
-
+ASGI_APPLICATION = "pariksha.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.environ.get("pariksha2dbName"),
+#         'USER':os.environ.get("pariksha2dbUser"),
+#         'PASSWORD':os.environ.get("pariksha2dbPassword"),
+#         'HOST':os.environ.get("pariksha2dbHost"),
+#         'PORT':'5432',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.getenv("pariksha2dbName"),
-        'USER':os.getenv("pariksha2dbUser"),
-        'PASSWORD':os.getenv("pariksha2dbPassword"),
-        'HOST':os.getenv("pariksha2dbHost"),
-        'PORT':'5432',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
- 
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+    'rest_framework.renderers.JSONRenderer',        
+    'rest_framework.renderers.TemplateHTMLRenderer',
+    ),
 }
 
 # Password validation
@@ -170,3 +180,11 @@ MEDIA_URL = '/media/'
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+
+
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TIMEZONE = "Asia/Kolkata"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
