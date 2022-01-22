@@ -96,3 +96,8 @@ def create_folder(path):
     if not os.path.exists(path):
         os.makedirs(path) 
 
+def get_testcase_input(testcase):
+    return 0
+
+def get_testcase_output(testcase):
+    return 1

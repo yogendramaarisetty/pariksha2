@@ -11,7 +11,8 @@ from django.core import serializers
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from .judge_api import coderun_api, run_sample
-
+from rest_framework import routers, serializers, viewsets
+from .serializers import *
 global user_data
 user_data = {'name': '', 'picture': ''}
 
@@ -166,6 +167,10 @@ def test_page(request, challenge_id, candidate_id):
 def create_test(request):
     return render(request,'create_test.html');
 
+class TestCaseViewSet(viewsets.ModelViewSet):
+    queryset = TestCase.objects.all()
+    serializer_class = TestcaseSerializer
+
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer, TemplateHTMLRenderer
@@ -175,7 +180,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view,permission_classes, renderer_classes
 from django.http.response import JsonResponse
-from .serializers import CompileRunRequestSerializer
+from .serializers import CompileRunRequestSerializer, TestcaseSerializer
 from .tasks import * 
 from .compile_run_entities import *
 import json
@@ -186,7 +191,7 @@ def candidate_compile_run(request):
     cr_request = CompileRunRequestSerializer(data=request.data)
     if cr_request.is_valid():
         cr_request = request.data
-        task = candidate_compile_run_task.delay(cr_request)
+        task = compile_run_task.delay(cr_request)
         return JsonResponse({'taskid':task.task_id})
     else:
         return JsonResponse(cr_request.errors)

@@ -6,12 +6,14 @@ class CompileRunRequest:
         self.language = language
         self.code = code
         self.stdin = stdin
-        self.is_custom_input = custom_input
         self.guid = guid
     def toJSON(self):
         return json.dumps(self, default=lambda o: o._asdict, 
             sort_keys=True, indent=4)
-    
+
+class CandidateCompileRunRequest(CompileRunRequest):
+    def __init__(self, language, code, custom_input, stdin, guid):
+        super().__init__(language, code, custom_input, stdin, guid) 
 class CompileRunResponse:
     def __init__(self,language,code):
         self.language = language
@@ -51,6 +53,11 @@ class Status(enum.Enum):
     compile_failed = 6
     run_failed = 7
 
+
+class RequestType(str,enum.Enum):
+    custom_input = 111
+    run = 112
+    submit = 113
 
 class ErrorType(enum.Enum):
     run_time_error = 401

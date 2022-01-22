@@ -1,5 +1,5 @@
 from celery import shared_task
-from .compile_run_processor import candidate_compile_run
+from .compile_run_processor import compile_run
 from celery_progress.backend import ProgressRecorder
 from .compile_run_entities import *
 import uuid,json
@@ -18,7 +18,7 @@ def xsum(numbers):
     return sum(numbers)
 
 @shared_task(bind=True)
-def candidate_compile_run_task(self,request):
+def compile_run_task(self,request):
     progress_recorder = ProgressRecorder(self)
     cr_request_obj = CompileRunRequest(
                             Language[request['language']],
@@ -26,9 +26,13 @@ def candidate_compile_run_task(self,request):
                             request['is_custom_input'],
                             request['stdin'],
                             uuid.UUID(request['guid'])
-        )
-    print(cr_request_obj)
-    response = candidate_compile_run(cr_request_obj,progress_recorder)
+                        )
+    response = compile_run(cr_request_obj,progress_recorder)
     return json.dumps(response.__dict__)
 
-
+@shared_task(bind=True)
+def candidate_question_compile_run_task(self,request,response):
+    request["candidate_id"]
+    request["question_id"]
+    request[""]
+    return response

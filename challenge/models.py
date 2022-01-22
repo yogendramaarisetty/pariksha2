@@ -2,6 +2,7 @@ import uuid
 from django.contrib.auth.models import User
 from django.db import models
 from ckeditor.fields import RichTextField
+from django.utils.translation import deactivate
 
 class Challenge(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -104,11 +105,11 @@ class TestCase(models.Model):
 
 class Submission(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    code_draft = models.ForeignKey(CodeDraft, on_delete=models.CASCADE, null=True)
-    passed_cases = models.IntegerField(default=0)
+    code = models.TextField() 
+    details = models.JSONField()
     score = models.IntegerField(default=0)
 
-
+#ignore this model for now
 class ChallengeLanguages(models.Model):
     class Meta:
         unique_together = [['challenge', 'language'], ]
