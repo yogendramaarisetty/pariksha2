@@ -11,7 +11,7 @@ click-didyoumean==0.3.0
 click-plugins==1.1.1
 click-repl==0.2.0
 defusedxml==0.6.0
-Django==3.2.13
+Django==3.2.17
 django-admin-interface==0.12.3
 django-allauth==0.42.0
 django-celery
